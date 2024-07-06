@@ -6,11 +6,9 @@ import Transactions from './Transactions'
 function Dashboard() {
     return (
         <div id="dashboard-container">
-            <div id="budget-breakdown-container" className='dashboard-content-cont'>
+            <div className='dashboard-content-cont'>
                 <Budget />
             </div>
-
-            <BudgetSnippets />
 
             <div id="transactions-container" className='dashboard-content-cont'>
                 <Transactions />    

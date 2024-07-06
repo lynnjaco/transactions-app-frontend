@@ -4,14 +4,10 @@ import BudgetSnippets from './BudgetSnippets'
 function Budget() {
     return (
         <>
-            <div id="budget-breakdow-container">
-
-            </div>
-            <div id="budget-snippets-container">
-                <BudgetSnippets/> 
-            </div>
+            <div id="budget-breakdown-container"></div>
+            <BudgetSnippets />
         </>
-    )
+    )  
 }
 
 export default Budget

@@ -5,6 +5,7 @@ function Home() {
         <div className='base-content-container'>
             <div className='component-title'>Home</div>
         </div>
+
     )
 }
 
