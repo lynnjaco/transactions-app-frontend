@@ -2,7 +2,8 @@ import './TransactionView.css'
 
 function TransactionView() {
     return (
-        <>
+        <div className='base-content-container'>
+            <div className='component-title'>Transaction View</div>
             <form id='transaction-form'>
                 <label>Date
                     <input type='date' name='transactionDate'/>
@@ -26,7 +27,7 @@ function TransactionView() {
                     <button id="submit-transaction-button" className="transaction-form-button">Submit</button>
                 </div>
             </form>
-        </>
+        </div>
     )
 }
 
