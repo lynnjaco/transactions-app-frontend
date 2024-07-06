@@ -11,10 +11,8 @@ function Dashboard() {
                 <Budget />
             </div>
 
-            <div className="dashboard-content-cont" id="budget-snippets-container">
-                <BudgetSnippets />
-            </div>
-
+            <BudgetSnippets />
+        
             <div className="dashboard-content-cont" id="transactions-container">
                 <Transactions />    
             </div>

@@ -1,0 +1,13 @@
+.snippet-container {
+    width: 350px;
+    height: 200px;
+    background: white;
+}
+
+#budget-snippets-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; 
+}
+
