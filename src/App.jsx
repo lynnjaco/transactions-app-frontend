@@ -13,16 +13,20 @@ import TransactionView from './Components/TransactionView'
 function App() {
 
   return (
-    <div>
+    <div id='app-view'>
       <Router>
-        <NavBar />
-        <Members />
-        <Routes>
-          <Route path="/" element={ <Home/> } />
-          <Route path="/about" element= { <About/> } />
-          <Route path="/dashboard" element= { <Dashboard/> } />
-          <Route path="/transaction/:id" element= { <TransactionView/> } />
-        </Routes>
+        <div id='left-bar-container'><NavBar /></div>
+        <div id="right-page-container">
+          <div id='members-container'><Members /></div>
+            <div id='main-content-container'>
+              <Routes>
+                  <Route path="/" element={ <Home/> } />
+                  <Route path="/about" element= { <About/> } />
+                  <Route path="/dashboard" element= { <Dashboard/> } />
+                  <Route path="/transaction/:id" element= { <TransactionView/> } />
+              </Routes>
+            </div>
+        </div>
       </Router>
     </div>
   )
