@@ -3,11 +3,11 @@ import './BudgetSnippets.css'
 function BudgetSnippets() {
     return (
         <>
-            <div id="income-container" class="snippet-container">
+            <div id="income-container" className="snippet-container">
             </div>
-            <div id="expense-container" class="snippet-container">
+            <div id="expense-container" className="snippet-container">
             </div>
-            <div id="net-container" class="snippet-container">
+            <div id="net-container" className="snippet-container">
             </div>
         </>
     )
