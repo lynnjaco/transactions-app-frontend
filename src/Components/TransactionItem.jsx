@@ -1,6 +1,6 @@
-import './Transaction.css'
+import './TransactionItem.css'
 
-function Transaction() {
+function TransactionItem() {
     return (
         <div>
             <p>Date</p>
@@ -15,4 +15,4 @@ function Transaction() {
     )
 }
 
-export default Transaction
+export default TransactionItem
