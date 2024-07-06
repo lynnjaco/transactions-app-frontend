@@ -39,4 +39,15 @@ a {
 
 .component-title {
   color: #BDC6C3;
+  position: absolute;
+  right: 40px;
+  top: 10px;
+  text-align: center;
+}
+
+.base-content-container {
+  background: #FFFFFF;
+  width: 100%;
+  height: 100%;
+  position: relative;
 }
