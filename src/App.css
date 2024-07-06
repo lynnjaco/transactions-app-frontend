@@ -28,9 +28,15 @@
 }
 
 #main-content-container {
-  background: #FFFFFF;
+  width: 90%;
+  height: 800px;
+  margin: 40px auto 0px auto;
 }
 
 a {
   text-decoration: none;
+}
+
+.component-title {
+  color: #BDC6C3;
 }
