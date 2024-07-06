@@ -1,5 +1,4 @@
 import './Dashboard.css'
-
 import Budget from './Budget'
 import BudgetSnippets from './BudgetSnippets'
 import Transactions from './Transactions'
@@ -7,13 +6,13 @@ import Transactions from './Transactions'
 function Dashboard() {
     return (
         <div id="dashboard-container">
-            <div className="dashboard-content-cont" id="budget-breakdown-container">
+            <div id="budget-breakdown-container" className='dashboard-content-cont'>
                 <Budget />
             </div>
 
             <BudgetSnippets />
-        
-            <div className="dashboard-content-cont" id="transactions-container">
+
+            <div id="transactions-container" className='dashboard-content-cont'>
                 <Transactions />    
             </div>
         </div>
