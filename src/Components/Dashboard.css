@@ -1,0 +1,25 @@
+#dashboard-container {
+    width: auto;  
+}
+
+#budget-breakdown-container {
+    width: 100%;
+    height: 300px;
+    background: #21AD85;
+
+}
+
+#budget-snippets-container {
+    width: 100%;
+}
+
+#transactions-container {
+    width: 100%;
+    height: 500px;
+    background: white;
+
+}
+
+.dashboard-content-cont {
+    margin: 35px 0px;
+}
