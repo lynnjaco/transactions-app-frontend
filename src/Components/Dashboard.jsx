@@ -3,12 +3,12 @@ import Members from './Members'
 import Budget from './Budget'
 import Transactions from './Transactions'
 
-function Dashboard() {
+function Dashboard( { members, transactions } ) {
     return (
         <div id="dashboard-container">
-            <div id='members-container'><Members /></div>
-            <div className='dashboard-content-cont'><Budget /></div>
-            <div id="transactions-container" className='dashboard-content-cont'><Transactions /></div>
+            <div id='members-container'><Members members={ members } /></div>
+            <div className='dashboard-content-cont'><Budget transactions={ transactions } /></div>
+            <div id="transactions-container" className='dashboard-content-cont'><Transactions transactions={ transactions }/></div>
         </div>
     )
 }

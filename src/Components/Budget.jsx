@@ -1,7 +1,16 @@
 import './Budget.css'
 import BudgetSnippets from './BudgetSnippets'
 
-function Budget() {
+function Budget( {transactions}) {
+
+    function convertCentsToDollars(num){
+        return num ? `$${(num/100).toFixed(2)}` : "";
+    }
+
+    function getWagesTotal(array){
+        return array.filter(obj => obj.category === "Wages").reduce((sum, obj) => sum + obj.amountInCents, 0);
+    }
+
     return (
         <>
             <div id="budget-breakdown-container">
@@ -9,8 +18,8 @@ function Budget() {
                     <p id='income-title' className='budget-title ctr-text'>Income</p>
                     <div id='income-breakdown-cont' className='budget-breakdown row'>
                         <div className='budget-breakdown-category-cont col'>
-                            <p className='category-title ctr-text'>Wage</p>
-                            <p className='category-amount ctr-text'>$1120.00</p>
+                            <p className='category-title ctr-text'>Wages</p>
+                            <p className='category-amount ctr-text'>{ convertCentsToDollars(getWagesTotal(transactions)) }</p>
                         </div>
                         <div className='budget-breakdown-category-cont col'>
                             <p className='category-title ctr-text'>Interest</p>

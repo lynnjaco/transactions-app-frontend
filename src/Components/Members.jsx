@@ -1,6 +1,6 @@
 import './Members.css'
 
-function Members() {
+function Members( {members} ) {
     return (
         <>
         </>

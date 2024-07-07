@@ -1,8 +1,9 @@
 import './Transactions.css'
 
-function Transactions() {
+function Transactions( {transactions}) {
     return (
         <>
+            
         </>
     )
 }

@@ -14,6 +14,7 @@ function App() {
   
   const API = import.meta.env.VITE_API_URL
   const [transactions, setTransactions] = useState([]);
+  const [members, setMembers] = useState([]);
 
   useEffect(() => {
     fetch(`${API}/transactions`)
@@ -22,6 +23,18 @@ function App() {
     })
     .then((res) => {
       setTransactions(res);
+    })
+    .catch( error => console.error(error))
+  }, [])
+
+  useEffect(() => {
+    fetch(`${API}/members`)
+    .then((response) => {
+      return response.json()
+    })
+    .then((res) => {
+      console.log(res);
+      setMembers(res);
     })
     .catch( error => console.error(error))
   }, [])
@@ -36,8 +49,9 @@ function App() {
             <Routes>
                 <Route path="/" element={ <Home/> } />
                 <Route path="/about" element= { <About/> } />
-                <Route path="/dashboard" element= { <Dashboard/> } />
+                <Route path="/dashboard" element= { <Dashboard members={ members } transactions={ transactions }/> } />
                 <Route path="/transaction" element= { <TransactionView/> } />
+                <Route path="/transaction/:id" element= { <TransactionView/> } />
             </Routes>
           </div>
         </div>
