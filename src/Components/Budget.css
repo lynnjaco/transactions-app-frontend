@@ -1,6 +1,6 @@
 #budget-breakdown-container {
     width: 100%;
-    height: 300px;
+    height: 250px;
     background: #21AD85;
     display: flex;
     flex-direction: column;
@@ -17,10 +17,10 @@
 .budget-title {
     color: #158464;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    font-size: 30px;
+    font-size: 20px;
     font-weight: 600;
     text-transform: uppercase;
-    margin: 3px;
+    margin: 3px 0px;
     text-align: left;
 }
 
@@ -40,10 +40,11 @@
     color:  #9ad7c6;
     margin: 0;
     text-transform: uppercase;
+    font-size: 12px;;
 }
 
 .category-amount {
     color: rgb(235, 235, 235);
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-
+    font-size: 12px;
 }
