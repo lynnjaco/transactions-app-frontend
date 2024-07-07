@@ -2,9 +2,17 @@
     width: auto;  
 }
 
+#members-container {
+    background: #FFFFFF;
+    width: 100%;
+    height: 75px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
 #transactions-container {
     width: 100%;
-    height: 400px;
+    height: 325px;
     background: white;
 }
 

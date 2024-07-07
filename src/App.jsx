@@ -7,7 +7,7 @@ import Home from './Components/Home'
 import About from './Components/About'
 import Dashboard from './Components/Dashboard'
 import NavBar from './Components/NavBar'
-import Members from './Components/Members'
+
 import TransactionView from './Components/TransactionView'
 
 function App() {
@@ -17,13 +17,13 @@ function App() {
       <Router>
         <div id='left-bar-container'><NavBar /></div>
         <div id="right-page-container">
-          <div id='members-container'><Members /></div>
+          
           <div id='main-content-container'>
             <Routes>
                 <Route path="/" element={ <Home/> } />
                 <Route path="/about" element= { <About/> } />
                 <Route path="/dashboard" element= { <Dashboard/> } />
-                <Route path="/transaction/:id" element= { <TransactionView/> } />
+                <Route path="/transaction" element= { <TransactionView/> } />
             </Routes>
           </div>
         </div>

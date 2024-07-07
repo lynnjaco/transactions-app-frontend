@@ -19,18 +19,10 @@
   background: #DDEDE9;
 }
 
-#members-container {
-  background: #FFFFFF;
-  width: 95%;
-  height: 75px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
 #main-content-container {
   width: 95%;
   height: 800px;
-  margin: 40px auto 0px auto;
+  margin: 20px auto 0px auto;
 }
 
 a {
@@ -56,7 +48,7 @@ a {
 .base-content-container {
   background: #21AD85;
   width: 100%;
-  height: 100%;
+  height: 620px;
   position: relative;
 }
 
