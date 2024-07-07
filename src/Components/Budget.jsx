@@ -11,6 +11,10 @@ function Budget( {transactions}) {
         return array.filter(obj => obj.category === "Wages").reduce((sum, obj) => sum + obj.amountInCents, 0);
     }
 
+    function getInterestTotal(array){
+        return array.filter(obj => obj.category === "Interest").reduce((sum, obj) => sum + obj.amountInCents, 0);
+    }
+
     return (
         <>
             <div id="budget-breakdown-container">
@@ -23,7 +27,7 @@ function Budget( {transactions}) {
                         </div>
                         <div className='budget-breakdown-category-cont col'>
                             <p className='category-title ctr-text'>Interest</p>
-                            <p className='category-amount ctr-text'>$1120.00</p>
+                            <p className='category-amount ctr-text'>{ convertCentsToDollars(getInterestTotal(transactions)) }</p>
                         </div>
                         <div className='budget-breakdown-category-cont col'>
                             <p className='category-title ctr-text'>Investment</p>
