@@ -7,10 +7,24 @@ import Home from './Components/Home'
 import About from './Components/About'
 import Dashboard from './Components/Dashboard'
 import NavBar from './Components/NavBar'
-
 import TransactionView from './Components/TransactionView'
 
+
 function App() {
+  
+  const API = import.meta.env.VITE_API_URL
+  const [transactions, setTransactions] = useState([]);
+
+  useEffect(() => {
+    fetch(`${API}/transactions`)
+    .then((response) => {
+      return response.json()
+    })
+    .then((res) => {
+      setTransactions(res);
+    })
+    .catch( error => console.error(error))
+  }, [])
 
   return (
     <div id='app-view'>
