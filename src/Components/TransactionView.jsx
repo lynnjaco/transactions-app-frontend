@@ -4,7 +4,15 @@ function TransactionView() {
     return (
         <div className='base-content-container'>
             <div className='component-title'>Transaction View</div>
-            <form id='transaction-form'>
+            <form id='transaction-form' className='col'>
+                <label for="cars">Select User:
+                    <select name="Household Member" id="cars">
+                        <option value="household">Household</option>
+                        <option value="reggie">Reggie</option>
+                        <option value="larry">Larry</option>
+                    </select>
+                </label>
+
                 <label>Date
                     <input type='date' name='transactionDate'/>
                 </label>
@@ -15,6 +23,11 @@ function TransactionView() {
 
                 <label>Origin
                     <input type='text' name='transactionOrigin'/>
+                </label>
+
+                <label>Type
+                    <input type="button" name='income' value='Debit (-)'/>
+                    <input type="button" name='expense' value='Credit (+)'/>
                 </label>
 
                 <label>Amount
