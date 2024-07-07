@@ -9,21 +9,21 @@ function NavBar() {
             <div id="navbar-link-container"> 
             <Link to='/'>
                 <div className='navbar-link-cont'>
-                    <img className='navbar-icon' src='/assets/home.svg' alt='Home Navigation Icon'/>
+                    <img className='svg-icon navbar-icon' src='/assets/home.svg' alt='Home Navigation Icon'/>
                     <h4 className='navbar-link-title'>Home</h4>
                 </div>
             </Link>
 
             <Link to='/dashboard'>
                 <div className='navbar-link-cont'>
-                    <img className='navbar-icon' src='/assets/dashboard.svg' alt='Dashboard Navigation Icon'/>
+                    <img className='svg-icon navbar-icon' src='/assets/dashboard.svg' alt='Dashboard Navigation Icon'/>
                     <h4 className='navbar-link-title'>Dashboard</h4>
                 </div>
             </Link>
 
             <Link to='/about'>
                 <div className='navbar-link-cont'>
-                    <img className='navbar-icon' src='/assets/about.svg' alt='About Navigation Icon'/>
+                    <img className='svg-icon navbar-icon' src='/assets/about.svg' alt='About Navigation Icon'/>
                     <h4 className='navbar-link-title'>About</h4>
                 </div>
             </Link> 
