@@ -3,32 +3,61 @@ import BudgetSnippets from './BudgetSnippets'
 
 function Budget( {transactions}) {
 
+    // converts cents to dollars and creates a string of the amount
     function convertCentsToDollars(num){
         return num ? `$${(num/100).toFixed(2)}` : "";
     }
 
+    // income catgegory totals calculations
     function getWagesTotal(array){
         return array.filter(obj => obj.category === "Wages").reduce((sum, obj) => sum + obj.amountInCents, 0);
     }
-
     function getInterestTotal(array){
         return array.filter(obj => obj.category === "Interest").reduce((sum, obj) => sum + obj.amountInCents, 0);
     }
-
     function getInvestmentTotal(array){
         return array.filter(obj => obj.category === "Investment").reduce((sum, obj) => sum + obj.amountInCents, 0);
     }
-
     function getGiftTotal(array){
         return array.filter(obj => obj.category === "Gift").reduce((sum, obj) => sum + obj.amountInCents, 0);
     }
-
     function getBankTransferTotal(array){
         return array.filter(obj => obj.category === "Bank Transfer").reduce((sum, obj) => sum + obj.amountInCents, 0);
     }
-
     function getBusinessTotal(array){
         return array.filter(obj => obj.category === "Business").reduce((sum, obj) => sum + obj.amountInCents, 0);
+    }
+    function getOtherIncomeTotal(array){
+        return array.filter(obj => obj.category === "Other").reduce((sum, obj) => sum + obj.amountInCents, 0);
+    }
+
+    // expenses catgegory totals calculations
+    function getHomeTotal(array){
+        return array.filter(obj => obj.category === "Home").reduce((sum, obj) => sum + obj.amountInCents, 0);
+    }
+    function getShoppingTotal(array){
+        return array.filter(obj => obj.category === "Shopping").reduce((sum, obj) => sum + obj.amountInCents, 0);
+    }
+    function getAutoTotal(array){
+        return array.filter(obj => obj.category === "Auto").reduce((sum, obj) => sum + obj.amountInCents, 0);
+    }
+    function getAutoTotal(array){
+        return array.filter(obj => obj.category === "Auto").reduce((sum, obj) => sum + obj.amountInCents, 0);
+    }
+    function getEntertainmentTotal(array){
+        return array.filter(obj => obj.category === "Entertainment").reduce((sum, obj) => sum + obj.amountInCents, 0);
+    }
+    function getTravelTotal(array){
+        return array.filter(obj => obj.category === "Travel").reduce((sum, obj) => sum + obj.amountInCents, 0);
+    }
+    function getFoodTotal(array){
+        return array.filter(obj => obj.category === "Food").reduce((sum, obj) => sum + obj.amountInCents, 0);
+    }
+    function getHealthWellnessTotal(array){
+        return array.filter(obj => obj.category === "Health/Wellness").reduce((sum, obj) => sum + obj.amountInCents, 0);
+    }
+    function getOtherExpenseTotal(array){
+        return array.filter(obj => obj.category === "Other").reduce((sum, obj) => sum + obj.amountInCents, 0);
     }
 
     return (
@@ -63,7 +92,7 @@ function Budget( {transactions}) {
                         </div>
                         <div className='budget-breakdown-category-cont col'>
                             <p className='category-title ctr-text'>Other</p>
-                            <p className='category-amount ctr-text'>$1120.00</p>
+                            <p className='category-amount ctr-text'>{ convertCentsToDollars(getOtherIncomeTotal(transactions)) }</p>
                         </div>
                     </div>
                 </div>
@@ -72,40 +101,40 @@ function Budget( {transactions}) {
                     <div id='expenses-breakdown-cont' className='budget-breakdown row'>
                         <div className='budget-breakdown-category-cont col'>
                             <p className='category-title ctr-text'>Home</p>
-                            <p className='category-amount ctr-text'>$1120.00</p>
+                            <p className='category-amount ctr-text'>{ convertCentsToDollars(getHomeTotal(transactions)) }</p>
                         </div>
                         <div className='budget-breakdown-category-cont col'>
                             <p className='category-title ctr-text'>Shopping</p>
-                            <p className='category-amount ctr-text'>$1120.00</p>
+                            <p className='category-amount ctr-text'>{ convertCentsToDollars(getShoppingTotal(transactions)) }</p>
                         </div>
                         <div className='budget-breakdown-category-cont col'>
                             <p className='category-title ctr-text'>Auto</p>
-                            <p className='category-amount ctr-text'>$1120.00</p>
+                            <p className='category-amount ctr-text'>{ convertCentsToDollars(getAutoTotal(transactions)) }</p>
                         </div>
                         <div className='budget-breakdown-category-cont col'>
                             <p className='category-title ctr-text'>Entertainment</p>
-                            <p className='category-amount ctr-text'>$1120.00</p>
+                            <p className='category-amount ctr-text'>{ convertCentsToDollars(getEntertainmentTotal(transactions)) }</p>
                         </div>
                         <div className='budget-breakdown-category-cont col'>
                             <p className='category-title ctr-text'>Travel</p>
-                            <p className='category-amount ctr-text'>$1120.00</p>
+                            <p className='category-amount ctr-text'>{ convertCentsToDollars(getTravelTotal(transactions)) }</p>
                         </div>
                         <div className='budget-breakdown-category-cont col'>
                             <p className='category-title ctr-text'>Food</p>
-                            <p className='category-amount ctr-text'>$1120.00</p>
+                            <p className='category-amount ctr-text'>{ convertCentsToDollars(getFoodTotal(transactions)) }</p>
                         </div>
                         <div className='budget-breakdown-category-cont col'>
                             <p className='category-title ctr-text'>Health & Wellness</p>
-                            <p className='category-amount ctr-text'>$1120.00</p>
+                            <p className='category-amount ctr-text'>{ convertCentsToDollars(getHealthWellnessTotal(transactions)) }</p>
                         </div>
                         <div className='budget-breakdown-category-cont col'>
                             <p className='category-title ctr-text'>Other</p>
-                            <p className='category-amount ctr-text'>$1120.00</p>
+                            <p className='category-amount ctr-text'>{ convertCentsToDollars(getOtherExpenseTotal(transactions)) }</p>
                         </div>
                     </div>
                 </div>
             </div>
-            <BudgetSnippets />
+            <BudgetSnippets transactions={ transactions }/>
         </>
     )  
 }
