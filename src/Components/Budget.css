@@ -43,11 +43,11 @@
 }
 
 #income-breakdown-cont {
-    margin-top: 35px;
+    margin-top: 40px;
 }
 
 #expenses-breakdown-cont {
-    margin-top: 32px;
+    margin-top: 40px;
 }
 
 .category-title {
@@ -60,5 +60,6 @@
 .category-amount {
     color: rgb(235, 235, 235);
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    font-size: 12px;
+    font-size: 16px;
+    margin-top: 0%;
 }

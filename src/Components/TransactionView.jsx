@@ -1,6 +1,25 @@
+import { useState, useEffect } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 import './TransactionView.css'
 
-function TransactionView() {
+function TransactionView({API}) {
+
+    const [currentTransaction, setCurrentTransaction] = useState("");
+    const {id} = useParams();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        fetch(`${API}/transactions/${id}`)
+        .then(response => response.json())
+        .then(res => {
+            setCurrentTransaction(res);
+        })
+        .catch((error) => {
+            console.error(error);
+            navigate("/dashboard");
+        })
+    }, [id, navigate])
+
     return (
         <div className='base-content-container'>
             <div className='component-title'>Transaction View</div>
@@ -14,6 +33,7 @@ function TransactionView() {
                 </label>
 
                 <label>Date
+                    <p>{ currentTransaction.transactionDate}</p>
                     <input type='date' name='transactionDate'/>
                 </label>
 

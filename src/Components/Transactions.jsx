@@ -1,14 +1,8 @@
 import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import './Transactions.css'
 
 function Transactions( {transactions, convertCentsToDollars}) {
-
-    const navigate = useNavigate();   
-   
-    // function handleTransaction(id){
-    //     navigate(`/transaction/${id}`);
-    // }
 
     function sortByDate(array) {
         return array.sort((a, b) => {
@@ -35,12 +29,12 @@ function Transactions( {transactions, convertCentsToDollars}) {
                     <th id='delete-column'>Delete</th>
                 </tr>
                 { sortByDate(transactions).map( transaction => (
-                    <tr key={ transaction.id } className='transaction-item' >
-                        <td id='category-text'>{ transaction.category }</td>
-                        <td id='date-text'>{ transaction.transactionDate }</td>
-                        <td id='description-text'>{ transaction.transactionName }</td>
-                        <td id='source-text'>{ transaction.transactionOrigin }</td>
-                        <td id='amount-text'>{ convertCentsToDollars(transaction.amountInCents) }</td>
+                   <tr key={ transaction.id } className='transaction-item' >
+                        <td id='category-text'><p>{ transaction.category }</p></td>
+                        <td id='date-text'><Link to={`/transaction/${transaction.id}`}><p>{ transaction.transactionDate }</p></Link></td>
+                        <td id='description-text'><Link to={`/transaction/${transaction.id}`}><p>{ transaction.transactionName }</p></Link></td>
+                        <td id='source-text'><Link to={`/transaction/${transaction.id}`}><p>{ transaction.transactionOrigin }</p></Link></td>
+                        <td id='amount-text'><Link to={`/transaction/${transaction.id}`}><p>{ convertCentsToDollars(transaction.amountInCents) }</p></Link></td>
                         <td><img className="table-icon" src="/assets/editicon.svg" alt="Edit Icon" /></td>
                         <td><img className="table-icon" src="/assets/deleteeicon.svg" alt="Delete Icon" /></td>
                     </tr>
@@ -51,4 +45,5 @@ function Transactions( {transactions, convertCentsToDollars}) {
     )
 }
 
+// 
 export default Transactions

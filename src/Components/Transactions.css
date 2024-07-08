@@ -16,15 +16,21 @@ th{
 }
 
 .transaction-item {
-    text-transform: uppercase;
-    font-weight: 400;
     height: 40px;
-    color: #4f5f5b;
+
+    p {
+        text-transform: uppercase;
+        font-weight: 400;
+        color: #4f5f5b;
+    }
 }
 
 .transaction-item:hover {
-    color: #dfaf82;
-    cursor: pointer;
+
+    p {
+        color: #dfaf82;
+        cursor: pointer;
+    }
 
     td {
         font-weight: 500;

@@ -58,7 +58,21 @@
     display: inline-block;
     left: 200px;
     top: 32px;
-    color: #21AD85;
+    color: #76827f;
     font-size: 20px;
+}
 
+#new-member-input{
+    height: 30px;
+    width: 150px;
+
+    border: transparent;
+    text-align: center;
+    background-color: #e2ede9;
+    color: #303735;
+}
+
+#new-member-input:focus{
+    background: #d9e7e2;
+    outline: none;
 }

@@ -3,10 +3,10 @@ import Members from './Members'
 import Budget from './Budget'
 import Transactions from './Transactions'
 
-function Dashboard( { members, transactions, convertCentsToDollars } ) {
+function Dashboard( { members, setMembers, transactions, convertCentsToDollars } ) {
     return (
         <div id="dashboard-container">
-            <div id='members-container'><Members members={ members } /></div>
+            <div id='members-container'><Members members={ members } setMembers={ setMembers } /></div>
             <div className='dashboard-content-cont'><Budget transactions={ transactions } convertCentsToDollars={ convertCentsToDollars }/></div>
             <div id="transactions-container" className='dashboard-content-cont'><Transactions transactions={ transactions } convertCentsToDollars={ convertCentsToDollars }/></div>
         </div>

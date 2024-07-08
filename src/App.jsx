@@ -33,7 +33,6 @@ function App() {
       return response.json()
     })
     .then((res) => {
-      console.log(res);
       setMembers(res);
     })
     .catch( error => console.error(error))
@@ -54,9 +53,9 @@ function App() {
             <Routes>
                 <Route path="/" element={ <Home/> } />
                 <Route path="/about" element= { <About/> } />
-                <Route path="/dashboard" element= { <Dashboard members={ members } transactions={ transactions } convertCentsToDollars={ convertCentsToDollars }/> } />
-                <Route path="/transaction" element= { <TransactionView/> } />
-                <Route path="/transaction/:id" element= { <TransactionView/> } />
+                <Route path="/dashboard" element= { <Dashboard members={ members } setMembers={ setMembers } transactions={ transactions } convertCentsToDollars={ convertCentsToDollars }/> } />
+                <Route path="/transactions" element= { <TransactionView/> } />
+                <Route path="/transactions/:id" element= { <TransactionView/> } API={ API }/>
             </Routes>
           </div>
         </div>

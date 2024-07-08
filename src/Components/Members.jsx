@@ -1,6 +1,7 @@
 import './Members.css'
 
-function Members( {members} ) {
+function Members( {members, setMembers} ) {
+
     return (
         <div id='members-container'>
             <p id='dashboard-text'></p>
@@ -12,8 +13,9 @@ function Members( {members} ) {
                         {/* <p id='member-name-text'>{ member.memberName }</p> */}
                     </div>
                 ))}
+                {/* <input type="text" placeholder="Name" id='new-member-input' maxLength="20"/> */}
                 <div className='member-avatar' id='add-member-text' title='Add Household Member'><p>+</p></div>
-                </div>
+            </div>
         </div>
     )
 }
