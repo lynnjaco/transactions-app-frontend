@@ -1,0 +1,79 @@
+table {
+    color: #29302e;
+    margin: 10px 25px;
+}
+
+th{
+    height: 30px;
+    font-weight: 600;
+}
+
+#header-row {
+    color: #74968d;
+}
+
+.transaction-item {
+    text-transform: uppercase;
+    font-weight: 300;
+    height: 40px;
+}
+
+.transaction-item:hover {
+    color: #dfaf82;
+    cursor: pointer;
+
+    td {
+        font-weight: 500;
+    }
+}
+
+/* header elements */
+#category-column{
+    width: 2%;
+}
+#date-column{
+    width: 5%;
+}
+#description-column{
+    width: 15%;
+}
+#source-column{
+    width: 20%;
+}
+#amount-column{
+    width: 5%;
+    text-align: left;
+    padding-left: 10px;  
+}
+#edit-column{
+    width: 2.5%;
+}
+#delete-column{
+    width: 2.5%;
+}
+
+/* row elements */
+#category-text{
+    padding-left: 10px;
+}
+#date-text{
+    text-align: center;   
+}
+#description-text{
+    padding-left: 10px;  
+}
+#source-text{
+    padding-left: 10px;  
+}
+#amount-text{
+    text-align: left; 
+    padding-left: 10px;   
+}
+
+
+.table-icon {
+    height: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}

@@ -8,7 +8,7 @@ function Dashboard( { members, transactions, convertCentsToDollars } ) {
         <div id="dashboard-container">
             <div id='members-container'><Members members={ members } /></div>
             <div className='dashboard-content-cont'><Budget transactions={ transactions } convertCentsToDollars={ convertCentsToDollars }/></div>
-            <div id="transactions-container" className='dashboard-content-cont'><Transactions transactions={ transactions }/></div>
+            <div id="transactions-container" className='dashboard-content-cont'><Transactions transactions={ transactions } convertCentsToDollars={ convertCentsToDollars }/></div>
         </div>
     )
 }
