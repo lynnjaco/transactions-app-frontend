@@ -5,7 +5,19 @@ function Budget( {transactions, convertCentsToDollars}) {
 
     // income catgegory totals calculations
     function getWagesTotal(array){
-        return array.filter(obj => obj.category === "Wages").reduce((sum, obj) => sum + obj.amountInCents, 0);
+        return array
+        .filter(obj => obj.category === "Wages")
+        .reduce((sum, obj) => {
+            if (obj.frequency === "bi-monthly") {
+                return sum + (obj.amountInCents * 2)
+            } else if ( obj.frequency === "bi-weekly" ) {
+                return sum + (obj.amountInCents * 2.14)
+            } else if ( obj.frequency === "weekly" ) {
+                return sum + (obj.amountInCents * 4.2)
+            } else {
+                return sum + obj.amountInCents
+            }
+        }, 0);
     }
     function getInterestTotal(array){
         return array.filter(obj => obj.category === "Interest").reduce((sum, obj) => sum + obj.amountInCents, 0);
