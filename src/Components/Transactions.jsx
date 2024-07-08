@@ -2,6 +2,18 @@ import './Transactions.css'
 
 function Transactions( {transactions, convertCentsToDollars}) {
 
+    function sortByDate(array) {
+        return array.sort((a, b) => {
+            const [aMonth, aDay, aYear] = a.transactionDate.split('-').map(Number);
+            const [bMonth, bDay, bYear] = b.transactionDate.split('-').map(Number);
+    
+            const aDate = new Date(aYear, aMonth - 1, aDay);
+            const bDate = new Date(bYear, bMonth - 1, bDay);
+    
+            return bDate - aDate;
+        });
+    }
+    
     return (
         <>
             <table>
@@ -14,7 +26,7 @@ function Transactions( {transactions, convertCentsToDollars}) {
                     <th id='edit-column'>Edit</th>
                     <th id='delete-column'>Delete</th>
                 </tr>
-                { transactions.map( transaction => (
+                { sortByDate(transactions).map( transaction => (
                     <tr key={ transaction.id } className='transaction-item'>
                         <td id='category-text'>{ transaction.category }</td>
                         <td id='date-text'>{ transaction.transactionDate }</td>

@@ -4,17 +4,20 @@ table {
 }
 
 th{
-    height: 30px;
+    background: white;
+    height: 40px;
     font-weight: 600;
+    position: sticky;
+    top: 0;
 }
 
 #header-row {
-    color: #74968d;
+    color: #a6bdb7;
 }
 
 .transaction-item {
     text-transform: uppercase;
-    font-weight: 300;
+    font-weight: 400;
     height: 40px;
 }
 
@@ -30,6 +33,9 @@ th{
 /* header elements */
 #category-column{
     width: 2%;
+    text-align: left;
+    padding-left: 10px;
+
 }
 #date-column{
     width: 5%;
