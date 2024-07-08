@@ -23,7 +23,7 @@ function Budget( {transactions, convertCentsToDollars}) {
         return array.filter(obj => obj.category === "Business").reduce((sum, obj) => sum + obj.amountInCents, 0);
     }
     function getOtherIncomeTotal(array){
-        return array.filter(obj => obj.category === "Other").reduce((sum, obj) => sum + obj.amountInCents, 0);
+        return array.filter(obj => obj.category === "Other" && obj.transactionType === "Credit").reduce((sum, obj) => sum + obj.amountInCents, 0);
     }
 
     // expenses catgegory totals calculations
@@ -52,7 +52,7 @@ function Budget( {transactions, convertCentsToDollars}) {
         return array.filter(obj => obj.category === "Health/Wellness").reduce((sum, obj) => sum + obj.amountInCents, 0);
     }
     function getOtherExpenseTotal(array){
-        return array.filter(obj => obj.category === "Other").reduce((sum, obj) => sum + obj.amountInCents, 0);
+        return array.filter(obj => obj.category === "Other" && obj.transactionType === "Debit").reduce((sum, obj) => sum + obj.amountInCents, 0);
     }
 
     return (
