@@ -4,7 +4,7 @@ import './NavBar.css'
 function NavBar() {
     return (
         <>
-            <img src='' alt='Site Logo' />
+            <img id='site-logo' src='/assets/sitelogo.svg' alt='Site Logo' />
             
             <div id="navbar-link-container"> 
             <Link to='/'>

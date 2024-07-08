@@ -1,8 +1,14 @@
+#site-logo {
+    width: 75%;
+    margin: 20px;
+}
+
 #navbar-link-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 100px;
+    position: sticky;
+    top: 28%;
 }
 
 .navbar-link-cont {

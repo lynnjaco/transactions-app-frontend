@@ -1,6 +1,14 @@
+import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import './Transactions.css'
 
 function Transactions( {transactions, convertCentsToDollars}) {
+
+    const navigate = useNavigate();   
+   
+    // function handleTransaction(id){
+    //     navigate(`/transaction/${id}`);
+    // }
 
     function sortByDate(array) {
         return array.sort((a, b) => {
@@ -27,7 +35,7 @@ function Transactions( {transactions, convertCentsToDollars}) {
                     <th id='delete-column'>Delete</th>
                 </tr>
                 { sortByDate(transactions).map( transaction => (
-                    <tr key={ transaction.id } className='transaction-item'>
+                    <tr key={ transaction.id } className='transaction-item' >
                         <td id='category-text'>{ transaction.category }</td>
                         <td id='date-text'>{ transaction.transactionDate }</td>
                         <td id='description-text'>{ transaction.transactionName }</td>
