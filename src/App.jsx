@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, useParams } from 'react-router-dom'
 
 // Components
 import './App.css'
@@ -54,8 +54,8 @@ function App() {
                 <Route path="/" element={ <Home/> } />
                 <Route path="/about" element= { <About/> } />
                 <Route path="/dashboard" element= { <Dashboard members={ members } setMembers={ setMembers } transactions={ transactions } convertCentsToDollars={ convertCentsToDollars }/> } />
-                <Route path="/transactions" element= { <TransactionView/> } />
-                <Route path="/transactions/:id" element= { <TransactionView/> } API={ API }/>
+                {/* <Route path="/transactions" element= { <TransactionView/> } /> */}
+                <Route path="/transactions/:id" element= { <TransactionView API={ API }/> }/>
             </Routes>
           </div>
         </div>

@@ -31,10 +31,10 @@ function Transactions( {transactions, convertCentsToDollars}) {
                 { sortByDate(transactions).map( transaction => (
                    <tr key={ transaction.id } className='transaction-item' >
                         <td id='category-text'><p>{ transaction.category }</p></td>
-                        <td id='date-text'><Link to={`/transaction/${transaction.id}`}><p>{ transaction.transactionDate }</p></Link></td>
-                        <td id='description-text'><Link to={`/transaction/${transaction.id}`}><p>{ transaction.transactionName }</p></Link></td>
-                        <td id='source-text'><Link to={`/transaction/${transaction.id}`}><p>{ transaction.transactionOrigin }</p></Link></td>
-                        <td id='amount-text'><Link to={`/transaction/${transaction.id}`}><p>{ convertCentsToDollars(transaction.amountInCents) }</p></Link></td>
+                        <td id='date-text'><Link to={`/transactions/${transaction.id}`}><p>{ transaction.transactionDate }</p></Link></td>
+                        <td id='description-text'><Link to={`/transactions/${transaction.id}`}><p>{ transaction.transactionName }</p></Link></td>
+                        <td id='source-text'><Link to={`/transactions/${transaction.id}`}><p>{ transaction.transactionOrigin }</p></Link></td>
+                        <td id='amount-text'><Link to={`/transactions/${transaction.id}`}><p>{ convertCentsToDollars(transaction.amountInCents) }</p></Link></td>
                         <td><img className="table-icon" src="/assets/editicon.svg" alt="Edit Icon" /></td>
                         <td><img className="table-icon" src="/assets/deleteeicon.svg" alt="Delete Icon" /></td>
                     </tr>

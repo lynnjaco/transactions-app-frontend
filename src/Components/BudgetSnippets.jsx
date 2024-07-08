@@ -16,7 +16,7 @@ function BudgetSnippets( {transactions, convertCentsToDollars}) {
 
     return (
         <div id="budget-snippets-container">
-            <div id="income-container" class="snippet-container">
+            <div id="income-container" className="snippet-container">
                 <img className='snippet-icon' src='/assets/incomeicon.svg' alt='Income Snippet Icon'/>
                 <div className='snippet-amount-container'>
                     <p className='snippet-title'>Monthly Income</p>
@@ -24,7 +24,7 @@ function BudgetSnippets( {transactions, convertCentsToDollars}) {
                 </div>
             </div>
             
-            <div id="expense-container" class="snippet-container">
+            <div id="expense-container" className="snippet-container">
                 <img className='snippet-icon' src='/assets/expenseicon.svg' alt='Expenses Snippet Icon'/>
                 <div className='snippet-amount-container'>
                     <p className='snippet-title'>Monthly Expenses</p>
@@ -32,7 +32,7 @@ function BudgetSnippets( {transactions, convertCentsToDollars}) {
                 </div>
             </div>
 
-            <div id="net-container" class="snippet-container">
+            <div id="net-container" className="snippet-container">
                 <img className='snippet-icon' src='/assets/netincomeicon.png' alt='Net Income Snippet Icon'/>
                 <div className='snippet-amount-container'>
                     <p className='snippet-title'>Monthly Net Income</p>

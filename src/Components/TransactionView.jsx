@@ -15,10 +15,9 @@ function TransactionView({API}) {
             setCurrentTransaction(res);
         })
         .catch((error) => {
-            console.error(error);
             navigate("/dashboard");
         })
-    }, [id, navigate])
+    }, [API, id, navigate])
 
     return (
         <div className='base-content-container'>

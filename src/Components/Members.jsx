@@ -8,7 +8,7 @@ function Members( {members, setMembers} ) {
             <div className='row'>
                 <div className='member-avatar' title='View All Dashboard'><p>All</p></div>
                 { members.map( member => (
-                    <div className='col'>
+                    <div key={ member.id }className='col'>
                         <div className='member-avatar' title={`View ${member.memberName}'s Dashboard`} ><p>{ member.memberName[0].toUpperCase()}</p></div>
                         {/* <p id='member-name-text'>{ member.memberName }</p> */}
                     </div>
