@@ -19,6 +19,7 @@ th{
     text-transform: uppercase;
     font-weight: 400;
     height: 40px;
+    color: #4f5f5b;
 }
 
 .transaction-item:hover {
