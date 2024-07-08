@@ -51,3 +51,14 @@
     margin: 0%;
     color: #76827f;
 }
+
+.member-avatar:hover:after {
+    position: absolute;
+    content: attr(title);
+    display: inline-block;
+    left: 200px;
+    top: 32px;
+    color: #21AD85;
+    font-size: 20px;
+
+}
