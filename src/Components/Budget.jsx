@@ -19,6 +19,10 @@ function Budget( {transactions}) {
         return array.filter(obj => obj.category === "Investment").reduce((sum, obj) => sum + obj.amountInCents, 0);
     }
 
+    function getGiftTotal(array){
+        return array.filter(obj => obj.category === "Gift").reduce((sum, obj) => sum + obj.amountInCents, 0);
+    }
+
     return (
         <>
             <div id="budget-breakdown-container">
@@ -39,7 +43,7 @@ function Budget( {transactions}) {
                         </div>
                         <div className='budget-breakdown-category-cont col'>
                             <p className='category-title ctr-text'>Gift</p>
-                            <p className='category-amount ctr-text'>$1120.00</p>
+                            <p className='category-amount ctr-text'>{ convertCentsToDollars(getGiftTotal(transactions)) }</p>
                         </div>
                         <div className='budget-breakdown-category-cont col'>
                             <p className='category-title ctr-text'>Bank Transfer</p>
