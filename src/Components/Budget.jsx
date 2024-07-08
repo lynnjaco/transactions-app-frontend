@@ -27,7 +27,9 @@ function Budget( {transactions}) {
         return array.filter(obj => obj.category === "Bank Transfer").reduce((sum, obj) => sum + obj.amountInCents, 0);
     }
 
-    
+    function getBusinessTotal(array){
+        return array.filter(obj => obj.category === "Business").reduce((sum, obj) => sum + obj.amountInCents, 0);
+    }
 
     return (
         <>
@@ -57,7 +59,7 @@ function Budget( {transactions}) {
                         </div>
                         <div className='budget-breakdown-category-cont col'>
                             <p className='category-title ctr-text'>Business</p>
-                            <p className='category-amount ctr-text'>$1120.00</p>
+                            <p className='category-amount ctr-text'>{ convertCentsToDollars(getBusinessTotal(transactions)) }</p>
                         </div>
                         <div className='budget-breakdown-category-cont col'>
                             <p className='category-title ctr-text'>Other</p>
