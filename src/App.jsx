@@ -39,6 +39,11 @@ function App() {
     .catch( error => console.error(error))
   }, [])
 
+  // converts cents to dollars and creates a string of the amount
+  function convertCentsToDollars(num){
+    return num ? `$${(num/100).toFixed(2)}` : "";
+}
+
   return (
     <div id='app-view'>
       <Router>
@@ -49,7 +54,7 @@ function App() {
             <Routes>
                 <Route path="/" element={ <Home/> } />
                 <Route path="/about" element= { <About/> } />
-                <Route path="/dashboard" element= { <Dashboard members={ members } transactions={ transactions }/> } />
+                <Route path="/dashboard" element= { <Dashboard members={ members } transactions={ transactions } convertCentsToDollars={ convertCentsToDollars }/> } />
                 <Route path="/transaction" element= { <TransactionView/> } />
                 <Route path="/transaction/:id" element= { <TransactionView/> } />
             </Routes>

@@ -1,12 +1,7 @@
 import './Budget.css'
 import BudgetSnippets from './BudgetSnippets'
 
-function Budget( {transactions}) {
-
-    // converts cents to dollars and creates a string of the amount
-    function convertCentsToDollars(num){
-        return num ? `$${(num/100).toFixed(2)}` : "";
-    }
+function Budget( {transactions, convertCentsToDollars}) {
 
     // income catgegory totals calculations
     function getWagesTotal(array){
@@ -134,7 +129,7 @@ function Budget( {transactions}) {
                     </div>
                 </div>
             </div>
-            <BudgetSnippets transactions={ transactions }/>
+            <BudgetSnippets transactions={ transactions } convertCentsToDollars={ convertCentsToDollars }/>
         </>
     )  
 }

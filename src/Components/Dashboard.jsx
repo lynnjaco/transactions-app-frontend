@@ -3,11 +3,11 @@ import Members from './Members'
 import Budget from './Budget'
 import Transactions from './Transactions'
 
-function Dashboard( { members, transactions } ) {
+function Dashboard( { members, transactions, convertCentsToDollars } ) {
     return (
         <div id="dashboard-container">
             <div id='members-container'><Members members={ members } /></div>
-            <div className='dashboard-content-cont'><Budget transactions={ transactions } /></div>
+            <div className='dashboard-content-cont'><Budget transactions={ transactions } convertCentsToDollars={ convertCentsToDollars }/></div>
             <div id="transactions-container" className='dashboard-content-cont'><Transactions transactions={ transactions }/></div>
         </div>
     )
