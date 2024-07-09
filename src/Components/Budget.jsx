@@ -48,9 +48,6 @@ function Budget( {transactions, convertCentsToDollars}) {
     function getAutoTotal(array){
         return array.filter(obj => obj.category === "Auto").reduce((sum, obj) => sum + obj.amountInCents, 0);
     }
-    function getAutoTotal(array){
-        return array.filter(obj => obj.category === "Auto").reduce((sum, obj) => sum + obj.amountInCents, 0);
-    }
     function getEntertainmentTotal(array){
         return array.filter(obj => obj.category === "Entertainment").reduce((sum, obj) => sum + obj.amountInCents, 0);
     }
