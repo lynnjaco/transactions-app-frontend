@@ -116,6 +116,7 @@ function TransactionView({API, transactionObject, setTransactionObject, members}
         .catch((error) => console.error(error))
     }
 
+    if (!id) {
 
     return (
         <div className='base-content-container'>
@@ -180,7 +181,7 @@ function TransactionView({API, transactionObject, setTransactionObject, members}
                         </label>
 
                         {transactionObject.transactionType === "Credit" && (
-                            <label htmlFor="expenseCategory">Select Expense Type
+                            <label for="expenseCategory">Select Expense Type
                                 <select name="expenseCategory" id="expenseCategory" onChange={handleExpenseCategoryChange}>
                                     <option value="home">Home</option>
                                     <option value="shopping">Shopping</option>
@@ -221,6 +222,7 @@ function TransactionView({API, transactionObject, setTransactionObject, members}
             <p>{JSON.stringify(transactionObject)}</p>
         </div>
     )
+    }
 }
 
 export default TransactionView
