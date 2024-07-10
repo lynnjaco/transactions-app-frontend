@@ -20,13 +20,22 @@ function TransactionView({API, transactionObject, setTransactionObject, members}
         })
     }, [API, id, navigate])
 
-    function getMemberId(name, memberArray){
-        let selectedMember = memberArray.find( member => member.memberName.toLowerCase() === name.toLowerCase());
+    function getMemberId(name){
+        let selectedMember = members.find( member => member.memberName.toLowerCase() === name.toLowerCase());
         return selectedMember.id;
+    }
+
+    function getMemberNameFromID(id, memberArray){
+        let targetMember = memberArray.find( member => member.id === id);
+        return targetMember.memberName;
     }
 
     function convertDollarsToCents(amount){
         return amount * 100;
+    }
+
+    function convertCentsToDollars(amount){
+        return `$${(amount/100).toFixed(2)}`;
     }
 
     function handleSubmit(e) {
@@ -117,111 +126,258 @@ function TransactionView({API, transactionObject, setTransactionObject, members}
     }
 
     if (!id) {
+        return (
+            <div className='base-content-container'>
+                <div className='component-title'>Transaction View</div>
+                <form id='transaction-form' className='col'>
+                    <label for="members">Select Member
+                        <select name="members" id="members" onChange={handleMemberChange}>
+                            {members.map( mem => (
+                                <option key={ mem.id }value={`${mem.memberName.toLowerCase()}`}>{`${mem.memberName}`}</option>
+                            ))}
+                        </select>
+                    </label>
 
-    return (
-        <div className='base-content-container'>
+                    <label>Date
+                        <input type='date' name='transactionDate' onChange={handleDateChange}/>
+                    </label>
+
+                    <label>Description
+                        <input type='text' name='transactionDescription' onChange={handleDescriptionChange}/>
+                    </label>
+
+                    <label>Origin
+                        <input type='text' name='transactionOrigin' onChange={handleOriginChange}/>
+                    </label>
+
+                    <div>
+                        <div className='row'>
+                            <label>
+                                <br />Debit (+)
+                                <input
+                                    type="radio"
+                                    name="transactionTypeSelection"
+                                    value="Debit"
+                                    checked={transactionObject.transactionType === "Debit"}
+                                    onChange={handleTypeChange}
+                                />
+                            </label>
+
+                            {transactionObject.transactionType === "Debit" && (
+                                <label htmlFor="incomeCategory">Select Income Type
+                                    <select name="incomeCategory" id="incomeCategory" onChange={handleIncomeCategoryChange}>
+                                        <option value="wages">Wages</option>
+                                        <option value="interest">Interest</option>
+                                        <option value="investment">Investment</option>
+                                        <option value="gift">Gift</option>
+                                        <option value="bankTransfer">Bank Transfer</option>
+                                        <option value="business">Business</option>
+                                        <option value="otherIncome">Other</option>
+                                    </select>
+                                </label>
+                            )}
+
+                            <label>
+                                <br />Credit (-)
+                                <input
+                                    type="radio"
+                                    name="transactionTypeSelection"
+                                    value="Credit"
+                                    checked={transactionObject.transactionType === "Credit"}
+                                    onChange={handleTypeChange}
+                                />
+                            </label>
+
+                            {transactionObject.transactionType === "Credit" && (
+                                <label for="expenseCategory">Select Expense Type
+                                    <select name="expenseCategory" id="expenseCategory" onChange={handleExpenseCategoryChange}>
+                                        <option value="home">Home</option>
+                                        <option value="shopping">Shopping</option>
+                                        <option value="auto">Auto</option>
+                                        <option value="entertainment">Entertainment</option>
+                                        <option value="travel">Travel</option>
+                                        <option value="food">Food</option>
+                                        <option value="healthWellness">Health/Wellness</option>
+                                        <option value="otherExpense">Other</option>
+                                    </select>
+                                </label>
+                            )}
+                        </div>
+                    </div>
+
+                    <label>Amount
+                        <input type='number' name='transactionAmount' onChange={handleAmountChange}/>
+                    </label>
+
+                    <label for="frequency">Frequency
+                        <select name="frequency" onChange={handleFrequencyChange}>
+                            <option value="one-time">One-Time</option>
+                            <option value="daily">Daily</option>
+                            <option value="weekly">Weekly</option>
+                            <option value="bi-weekly">Bi-Weekly</option>
+                            <option value="bi-monthly">Bi-Monthly</option>
+                            <option value="monthly">Monthly</option>
+                            <option value="annually">Annually</option>
+                        </select>
+                    </label>
+
+                    <div id="transaction-form-buttons">
+                        <button id="submit-transaction-button" className="transaction-form-button" onClick={handleSubmit}>Submit</button>
+                    </div>
+                </form>
+                <p>{JSON.stringify(transactionObject)}</p>
+            </div>
+        )
+    } else {
+        return (
+            <div className='base-content-container'>
             <div className='component-title'>Transaction View</div>
-            <form id='transaction-form' className='col'>
-                <label for="members">Select Member
-                    <select name="members" id="members" onChange={handleMemberChange}>
-                        {members.map( mem => (
-                            <option key={ mem.id }value={`${mem.memberName.toLowerCase()}`}>{`${mem.memberName}`}</option>
-                        ))}
-                    </select>
-                </label>
 
-                <label>Date
-                    <input type='date' name='transactionDate' onChange={handleDateChange}/>
-                </label>
+            <div id="transaction-show-container" className="col">
+            <div className='member-avatar'><p>{currentTransaction.transactionMemberID}</p></div>
+                <p id="transaction-member-text">{currentTransaction.transactionMemberID}'s Transaction</p>
+  
+                <div id="transaction-source-container" className="row">
+                    <p className='trasnaction-info-text'>{currentTransaction.transactionName}</p>
+                    <p id="from">from</p>
+                    <p className='trasnaction-info-text'>{currentTransaction.transactionOrigin}</p>
+                </div>
+                
+                <div id="amount-container">
+                    <p id="transaction-amount">{ currentTransaction.transactionType === "Credit" ? "+ " + convertCentsToDollars(currentTransaction.amountInCents) : "- " + convertCentsToDollars(currentTransaction.amountInCents) }</p>
+                    <p id="transaction-type">{currentTransaction.transactionType}</p>
+                </div>
+                
+                <div id="details-container" className="col">
+                    
+                    <div className="detail row">
+                    <p className="transaction-detail-title">Category</p>
+                    <p className="transaction-detail-text">{currentTransaction.category}</p>
+                    </div>
+                    
+                    <div className="detail row">
+                    <p className="transaction-detail-title">Date</p>
+                    <p className="transaction-detail-text">{currentTransaction.transactionDate}</p>
+                    </div>
 
-                <label>Description
-                    <input type='text' name='transactionDescription' onChange={handleDescriptionChange}/>
-                </label>
-
-                <label>Origin
-                    <input type='text' name='transactionOrigin' onChange={handleOriginChange}/>
-                </label>
-
-                <div>
-                    <div className='row'>
-                        <label>
-                            <br />Debit (+)
-                            <input
-                                type="radio"
-                                name="transactionTypeSelection"
-                                value="Debit"
-                                checked={transactionObject.transactionType === "Debit"}
-                                onChange={handleTypeChange}
-                            />
-                        </label>
-
-                        {transactionObject.transactionType === "Debit" && (
-                            <label htmlFor="incomeCategory">Select Income Type
-                                <select name="incomeCategory" id="incomeCategory" onChange={handleIncomeCategoryChange}>
-                                    <option value="wages">Wages</option>
-                                    <option value="interest">Interest</option>
-                                    <option value="investment">Investment</option>
-                                    <option value="gift">Gift</option>
-                                    <option value="bankTransfer">Bank Transfer</option>
-                                    <option value="business">Business</option>
-                                    <option value="otherIncome">Other</option>
-                                </select>
-                            </label>
-                        )}
-
-                        <label>
-                            <br />Credit (-)
-                            <input
-                                type="radio"
-                                name="transactionTypeSelection"
-                                value="Credit"
-                                checked={transactionObject.transactionType === "Credit"}
-                                onChange={handleTypeChange}
-                            />
-                        </label>
-
-                        {transactionObject.transactionType === "Credit" && (
-                            <label for="expenseCategory">Select Expense Type
-                                <select name="expenseCategory" id="expenseCategory" onChange={handleExpenseCategoryChange}>
-                                    <option value="home">Home</option>
-                                    <option value="shopping">Shopping</option>
-                                    <option value="auto">Auto</option>
-                                    <option value="entertainment">Entertainment</option>
-                                    <option value="travel">Travel</option>
-                                    <option value="food">Food</option>
-                                    <option value="healthWellness">Health/Wellness</option>
-                                    <option value="otherExpense">Other</option>
-                                </select>
-                            </label>
-                        )}
+                    <div className="detail row">
+                    <p className="transaction-detail-title">Frequency</p>
+                    <p className="transaction-detail-text">{currentTransaction.frequency}</p>
+                    </div>
+                    
+                    <div className="detail row">
+                    <p className="transaction-detail-title">Transaction ID</p>
+                    <p className="transaction-detail-text">{currentTransaction.id}</p>
                     </div>
                 </div>
 
-                <label>Amount
-                    <input type='number' name='transactionAmount' onChange={handleAmountChange}/>
-                </label>
-
-                <label for="frequency">Frequency
-                    <select name="frequency" onChange={handleFrequencyChange}>
-                        <option value="one-time">One-Time</option>
-                        <option value="daily">Daily</option>
-                        <option value="weekly">Weekly</option>
-                        <option value="bi-weekly">Bi-Weekly</option>
-                        <option value="bi-monthly">Bi-Monthly</option>
-                        <option value="monthly">Monthly</option>
-                        <option value="annually">Annually</option>
-                    </select>
-                </label>
-
-                <div id="transaction-form-buttons">
+                <div id="transactions-button-containter" className='row'>
                     <button id="edit-transaction-button" className="transaction-form-button">Edit</button>
                     <button id="delete-transaction-button" className="transaction-form-button" onClick={handleDelete}>Delete</button>
-                    <button id="submit-transaction-button" className="transaction-form-button" onClick={handleSubmit}>Submit</button>
-                </div>
-            </form>
-            <p>{JSON.stringify(transactionObject)}</p>
+                </div>  
+            </div>
+            
+                {/* <form id='transaction-form' className='col'>
+                    <label for="members">Select Member
+                        <select name="members" id="members" onChange={handleMemberChange}>
+                            {members.map( mem => (
+                                <option key={ mem.id }value={`${mem.memberName.toLowerCase()}`}>{`${mem.memberName}`}</option>
+                            ))}
+                        </select>
+                    </label>
+
+                    <label>Date
+                        <input type='date' name='transactionDate' onChange={handleDateChange}/>
+                    </label>
+
+                    <label>Description
+                        <input type='text' name='transactionDescription' onChange={handleDescriptionChange}/>
+                    </label>
+
+                    <label>Origin
+                        <input type='text' name='transactionOrigin' onChange={handleOriginChange}/>
+                    </label>
+
+                    <div>
+                        <div className='row'>
+                            <label>
+                                <br />Debit (+)
+                                <input
+                                    type="radio"
+                                    name="transactionTypeSelection"
+                                    value="Debit"
+                                    checked={transactionObject.transactionType === "Debit"}
+                                    onChange={handleTypeChange}
+                                />
+                            </label>
+
+                            {transactionObject.transactionType === "Debit" && (
+                                <label htmlFor="incomeCategory">Select Income Type
+                                    <select name="incomeCategory" id="incomeCategory" onChange={handleIncomeCategoryChange}>
+                                        <option value="wages">Wages</option>
+                                        <option value="interest">Interest</option>
+                                        <option value="investment">Investment</option>
+                                        <option value="gift">Gift</option>
+                                        <option value="bankTransfer">Bank Transfer</option>
+                                        <option value="business">Business</option>
+                                        <option value="otherIncome">Other</option>
+                                    </select>
+                                </label>
+                            )}
+
+                            <label>
+                                <br />Credit (-)
+                                <input
+                                    type="radio"
+                                    name="transactionTypeSelection"
+                                    value="Credit"
+                                    checked={transactionObject.transactionType === "Credit"}
+                                    onChange={handleTypeChange}
+                                />
+                            </label>
+
+                            {transactionObject.transactionType === "Credit" && (
+                                <label for="expenseCategory">Select Expense Type
+                                    <select name="expenseCategory" id="expenseCategory" onChange={handleExpenseCategoryChange}>
+                                        <option value="home">Home</option>
+                                        <option value="shopping">Shopping</option>
+                                        <option value="auto">Auto</option>
+                                        <option value="entertainment">Entertainment</option>
+                                        <option value="travel">Travel</option>
+                                        <option value="food">Food</option>
+                                        <option value="healthWellness">Health/Wellness</option>
+                                        <option value="otherExpense">Other</option>
+                                    </select>
+                                </label>
+                            )}
+                        </div>
+                    </div>
+
+                    <label>Amount
+                        <input type='number' name='transactionAmount' onChange={handleAmountChange}/>
+                    </label>
+
+                    <label for="frequency">Frequency
+                        <select name="frequency" onChange={handleFrequencyChange}>
+                            <option value="one-time">One-Time</option>
+                            <option value="daily">Daily</option>
+                            <option value="weekly">Weekly</option>
+                            <option value="bi-weekly">Bi-Weekly</option>
+                            <option value="bi-monthly">Bi-Monthly</option>
+                            <option value="monthly">Monthly</option>
+                            <option value="annually">Annually</option>
+                        </select>
+                    </label>
+
+                    <div id="transaction-form-buttons">
+                        <button id="edit-transaction-button" className="transaction-form-button">Edit</button>
+                        <button id="delete-transaction-button" className="transaction-form-button" onClick={handleDelete}>Delete</button>
+                        <button id="submit-transaction-button" className="transaction-form-button" onClick={handleSubmit}>Submit</button>
+                    </div>
+                </form> */}
         </div>
-    )
+        )
+
     }
 }
 
