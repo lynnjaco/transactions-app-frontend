@@ -25,9 +25,9 @@ function TransactionView({API, transactionObject, setTransactionObject, members}
         return selectedMember.id;
     }
 
-    function getMemberNameFromID(id, memberArray){
-        let targetMember = memberArray.find( member => member.id === id);
-        return targetMember.memberName;
+    function getMemberNameFromID(id, firstLetter = false){
+        let targetMember = members.find( member => member.id === id);
+        return firstLetter ? targetMember?.memberName[0] : targetMember?.memberName;
     }
 
     function convertDollarsToCents(amount){
@@ -50,8 +50,10 @@ function TransactionView({API, transactionObject, setTransactionObject, members}
             body: jsonData
         })
         .then(response => response.json())
-        .then( () => {
-            navigate("/dashboard");
+        .then( data => {
+            setTransactionObject({});
+            navigate(`/transactions/${data.id}`);
+
         })
         .catch((error) => {
             console.error('Error:', error);
@@ -234,8 +236,8 @@ function TransactionView({API, transactionObject, setTransactionObject, members}
             <div className='component-title'>Transaction View</div>
 
             <div id="transaction-show-container" className="col">
-            <div className='member-avatar'><p>{currentTransaction.transactionMemberID}</p></div>
-                <p id="transaction-member-text">{currentTransaction.transactionMemberID}'s Transaction</p>
+            <div className='member-avatar'><p>{getMemberNameFromID(currentTransaction.transactionMemberID, true)}</p></div>
+                <p id="transaction-member-text">{getMemberNameFromID(currentTransaction.transactionMemberID)}'s Transaction</p>
   
                 <div id="transaction-source-container" className="row">
                     <p className='trasnaction-info-text'>{currentTransaction.transactionName}</p>
@@ -276,7 +278,7 @@ function TransactionView({API, transactionObject, setTransactionObject, members}
                     <button id="delete-transaction-button" className="transaction-form-button" onClick={handleDelete}>Delete</button>
                 </div>  
             </div>
-            
+
                 {/* <form id='transaction-form' className='col'>
                     <label for="members">Select Member
                         <select name="members" id="members" onChange={handleMemberChange}>
