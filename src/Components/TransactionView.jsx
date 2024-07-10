@@ -104,6 +104,19 @@ function TransactionView({API, transactionObject, setTransactionObject, members}
         }));
     }
 
+    // deletes a transaction from the list
+    function handleDelete(e) {
+        e.preventDefault();
+        fetch(`${API}/transactions/${id}`, {
+        method: "DELETE"
+        })
+        .then(() => {
+        navigate("/dashboard")
+        })
+        .catch((error) => console.error(error))
+    }
+
+
     return (
         <div className='base-content-container'>
             <div className='component-title'>Transaction View</div>
@@ -201,7 +214,7 @@ function TransactionView({API, transactionObject, setTransactionObject, members}
 
                 <div id="transaction-form-buttons">
                     <button id="edit-transaction-button" className="transaction-form-button">Edit</button>
-                    <button id="delete-transaction-button" className="transaction-form-button">Delete</button>
+                    <button id="delete-transaction-button" className="transaction-form-button" onClick={handleDelete}>Delete</button>
                     <button id="submit-transaction-button" className="transaction-form-button" onClick={handleSubmit}>Submit</button>
                 </div>
             </form>

@@ -39,7 +39,7 @@ function Transactions( {transactions, convertCentsToDollars}) {
                             <td id='source-text'><Link to={`/transactions/${transaction.id}`}><p>{ transaction.transactionOrigin }</p></Link></td>
                             <td id='amount-text'><Link to={`/transactions/${transaction.id}`}><p>{ convertCentsToDollars(transaction.amountInCents) }</p></Link></td>
                             <td><img className="table-icon" src="/assets/editicon.svg" alt="Edit Icon" /></td>
-                            <td><img className="table-icon" src="/assets/deleteeicon.svg" alt="Delete Icon" /></td>
+                            <td><img className="table-icon" src="/assets/deleteicon.svg" alt="Delete Icon" /></td>
                         </tr>
                     ))}
                 </tbody>
