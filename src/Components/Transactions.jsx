@@ -46,7 +46,7 @@ function Transactions( {transactions, convertCentsToDollars}) {
     }
     
     return (
-        <>
+        <div id='transactions-component-container'>
             <div id='transactions-control-container' className='row'>
                 <div id='transaction-view' className='col'>
                     <div className='controls-cont row'>
@@ -90,9 +90,8 @@ function Transactions( {transactions, convertCentsToDollars}) {
                         </tr>
                     ))}
                 </tbody>
-            </table>
-            
-        </>
+            </table>  
+        </div>
     )
 }
 

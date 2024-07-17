@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import './TransactionView.css'
 
@@ -20,24 +20,23 @@ function TransactionView({API, transactionObject, setTransactionObject, members}
         })
     }, [API, id, navigate])
 
+    // helper functions for converting data for user's view
     function getMemberId(name){
         let selectedMember = members.find( member => member.memberName.toLowerCase() === name.toLowerCase());
         return selectedMember.id;
     }
-
     function getMemberNameFromID(id, firstLetter = false){
         let targetMember = members.find( member => member.id === id);
         return firstLetter ? targetMember?.memberName[0] : targetMember?.memberName;
     }
-
     function convertDollarsToCents(amount){
         return amount * 100;
     }
-
     function convertCentsToDollars(amount){
         return `$${(amount/100).toFixed(2)}`;
     }
 
+    // transaction control options
     function handleSubmit(e) {
         e.preventDefault();
         const jsonData = JSON.stringify(transactionObject);
@@ -59,7 +58,36 @@ function TransactionView({API, transactionObject, setTransactionObject, members}
             console.error('Error:', error);
         });
     }
+    function handleDelete(e) {
+        e.preventDefault();
+        fetch(`${API}/transactions/${id}`, {
+        method: "DELETE"
+        })
+        .then(() => {
+        navigate("/dashboard")
+        })
+        .catch((error) => console.error(error))
+    }
+    // resets transactionObject values to empty, the form, and returns to dashboard view
+    function handleCancel(e){
+        e.preventDefault();
+        setTransactionObject({});
+        navigate("/dashboard");
 
+    }
+    // resets the transaction view to empty and the form inputs
+    const newTransactionForm = useRef();
+    function handleReset(e){
+        e.preventDefault();
+        setTransactionObject({});
+        newTransactionForm.current.reset();
+    }
+    // updates the transaction view when on the transactions/:id routes
+    function handleUpdate(e){
+        e.preventDefault();
+    }
+
+    // handle inputs
     function handleMemberChange(e) {
         setTransactionObject(prevTransactionObject => ({
             ...prevTransactionObject,
@@ -115,123 +143,156 @@ function TransactionView({API, transactionObject, setTransactionObject, members}
         }));
     }
 
-    function handleUpdate(){
-        // updates the transaction view
-    }
-
-    // deletes a transaction from the list
-    function handleDelete(e) {
-        e.preventDefault();
-        fetch(`${API}/transactions/${id}`, {
-        method: "DELETE"
-        })
-        .then(() => {
-        navigate("/dashboard")
-        })
-        .catch((error) => console.error(error))
-    }
-
     if (!id) {
         return (
-            <div className='base-content-container'>
-                <div className='component-title'>Transaction View</div>
-                <form id='transaction-form' className='col'>
-                    <label for="members">Select Member
-                        <select name="members" id="members" onChange={handleMemberChange}>
-                            {members.map( mem => (
-                                <option key={ mem.id }value={`${mem.memberName.toLowerCase()}`}>{`${mem.memberName}`}</option>
-                            ))}
-                        </select>
-                    </label>
+            <div className='base-content-container row'>
+               
+                <div id="transaction-form-container">
+                     <div className='component-title'>New Transaction</div>
+                    <form id='transaction-form' className='col' ref={newTransactionForm}>
+                     <p>Fill in transaction details and submit when your transaction preview is correct.</p>
+                        <label for="members" className='new-transaction-label'>Select Member
+                            <select name="members" id="members" onChange={handleMemberChange} className='form-choice' required>
+                                {members.map( mem => (
+                                    <option key={ mem.id }value={`${mem.memberName.toLowerCase()}`}>{`${mem.memberName}`}</option>
+                                ))}
+                            </select>
+                        </label>
 
-                    <label>Date
-                        <input type='date' name='transactionDate' onChange={handleDateChange}/>
-                    </label>
+                        <label className='new-transaction-label'>Date
+                            <input type='date' name='transactionDate' onChange={handleDateChange} className='form-choice' required/>
+                        </label>
 
-                    <label>Description
-                        <input type='text' name='transactionDescription' onChange={handleDescriptionChange}/>
-                    </label>
+                        <label className='new-transaction-label'>Description
+                            <input type='text' name='transactionDescription' onChange={handleDescriptionChange} className='form-choice' required/>
+                        </label>
 
-                    <label>Origin
-                        <input type='text' name='transactionOrigin' onChange={handleOriginChange}/>
-                    </label>
+                        <label className='new-transaction-label'>Origin
+                            <input type='text' name='transactionOrigin' onChange={handleOriginChange} className='form-choice' required/>
+                        </label>
 
-                    <div>
-                        <div className='row'>
-                            <label>
-                                <br />Debit (+)
-                                <input
-                                    type="radio"
-                                    name="transactionTypeSelection"
-                                    value="Debit"
-                                    checked={transactionObject.transactionType === "Debit"}
-                                    onChange={handleTypeChange}
-                                />
-                            </label>
-
-                            {transactionObject.transactionType === "Debit" && (
-                                <label htmlFor="incomeCategory">Select Income Type
-                                    <select name="incomeCategory" id="incomeCategory" onChange={handleIncomeCategoryChange}>
-                                        <option value="wages">Wages</option>
-                                        <option value="interest">Interest</option>
-                                        <option value="investment">Investment</option>
-                                        <option value="gift">Gift</option>
-                                        <option value="bankTransfer">Bank Transfer</option>
-                                        <option value="business">Business</option>
-                                        <option value="otherIncome">Other</option>
-                                    </select>
+                        <div className='new-transaction-label'>
+                            <div className='row'>
+                                <label>
+                                    <br />Debit (-)
+                                    <input
+                                        type="radio"
+                                        name="transactionTypeSelection"
+                                        value="Debit"
+                                        checked={transactionObject.transactionType === "Debit"}
+                                        onChange={handleTypeChange}
+                                    />
                                 </label>
-                            )}
 
-                            <label>
-                                <br />Credit (-)
-                                <input
-                                    type="radio"
-                                    name="transactionTypeSelection"
-                                    value="Credit"
-                                    checked={transactionObject.transactionType === "Credit"}
-                                    onChange={handleTypeChange}
-                                />
-                            </label>
-
-                            {transactionObject.transactionType === "Credit" && (
-                                <label for="expenseCategory">Select Expense Type
-                                    <select name="expenseCategory" id="expenseCategory" onChange={handleExpenseCategoryChange}>
-                                        <option value="home">Home</option>
-                                        <option value="shopping">Shopping</option>
-                                        <option value="auto">Auto</option>
-                                        <option value="entertainment">Entertainment</option>
-                                        <option value="travel">Travel</option>
-                                        <option value="food">Food</option>
-                                        <option value="healthWellness">Health/Wellness</option>
-                                        <option value="otherExpense">Other</option>
-                                    </select>
+                                <label>
+                                    <br />Credit (+)
+                                    <input
+                                        type="radio"
+                                        name="transactionTypeSelection"
+                                        value="Credit"
+                                        checked={transactionObject.transactionType === "Credit"}
+                                        onChange={handleTypeChange}
+                                    />
                                 </label>
-                            )}
+                            </div>
+                            <div id="select-category-container">
+                                {transactionObject.transactionType === "Credit" && (
+                                    <label for="incomeCategory" className='new-transaction-label'>Select Income Type
+                                        <select name="incomeCategory" id="incomeCategory" onChange={handleIncomeCategoryChange} className='form-choice' required>
+                                            <option value="Wages">Wages</option>
+                                            <option value="Interest">Interest</option>
+                                            <option value="Investment">Investment</option>
+                                            <option value="Gift">Gift</option>
+                                            <option value="Bank Transfer">Bank Transfer</option>
+                                            <option value="Business">Business</option>
+                                            <option value="Other Income">Other</option>
+                                        </select>
+                                    </label>
+                                )}
+
+                                {transactionObject.transactionType === "Debit" && (
+                                    <label for="expenseCategory" className='new-transaction-label'>Select Expense Type
+                                        <select name="expenseCategory" id="expenseCategory" onChange={handleExpenseCategoryChange} className='form-choice' required>
+                                            <option value="Home">Home</option>
+                                            <option value="Shopping">Shopping</option>
+                                            <option value="Auto">Auto</option>
+                                            <option value="Entertainment">Entertainment</option>
+                                            <option value="Travel">Travel</option>
+                                            <option value="Food">Food</option>
+                                            <option value="Health/Wellness">Health/Wellness</option>
+                                            <option value="Other Expense">Other</option>
+                                        </select>
+                                    </label>
+                                )}
+                            </div>
+                        </div>
+
+                        <label className='new-transaction-label'>Amount
+                            <input type='number' name='transactionAmount' onChange={handleAmountChange} className='form-choice' required/>
+                        </label>
+
+                        <label for="frequency" className='new-transaction-label'>Frequency
+                            <select name="frequency" onChange={handleFrequencyChange} className='form-choice' required>
+                                <option value="one-time">One-Time</option>
+                                <option value="daily">Daily</option>
+                                <option value="weekly">Weekly</option>
+                                <option value="bi-weekly">Bi-Weekly</option>
+                                <option value="bi-monthly">Bi-Monthly</option>
+                                <option value="monthly">Monthly</option>
+                                <option value="annually">Annually</option>
+                            </select>
+                        </label>
+
+                        <div id="transaction-form-buttons">
+                            <button id="cancel-transaction-button" className="new-transaction-form-button" onClick={handleCancel}>Cancel</button>
+                            <button id="reset-transaction-button" className="new-transaction-form-button" onClick={handleReset}>Reset</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div id="transaction-show-container" className="col">
+                <div className='member-avatar'><p>{getMemberNameFromID(transactionObject.transactionMemberID, true)}</p></div>
+                    <p id="transaction-member-text">{transactionObject.transactionMemberID ? getMemberNameFromID(transactionObject.transactionMemberID) : "Member"}'s Transaction</p>
+    
+                    <div id="transaction-source-container" className="row">
+                        <p className='trasnaction-info-text'>{transactionObject.transactionName}</p>
+                        <p id="from">from</p>
+                        <p className='trasnaction-info-text'>{transactionObject.transactionOrigin}</p>
+                    </div>
+                    
+                    <div id="amount-container">
+                        <p id="transaction-amount">{ transactionObject.transactionType === "Credit" ? "+ " + convertCentsToDollars(transactionObject.amountInCents) : "- " + convertCentsToDollars(transactionObject.amountInCents) }</p>
+                        <p id="transaction-type">{transactionObject.transactionType}</p>
+                    </div>
+                    
+                    <div id="details-container" className="col">
+                        
+                        <div className="detail row">
+                        <p className="transaction-detail-title">Category</p>
+                        <p className="transaction-detail-text">{transactionObject.category}</p>
+                        </div>
+                        
+                        <div className="detail row">
+                        <p className="transaction-detail-title">Date</p>
+                        <p className="transaction-detail-text">{transactionObject.transactionDate}</p>
+                        </div>
+
+                        <div className="detail row">
+                        <p className="transaction-detail-title">Frequency</p>
+                        <p className="transaction-detail-text">{transactionObject.frequency}</p>
+                        </div>
+                        
+                        <div className="detail row">
+                        <p className="transaction-detail-title">Transaction ID</p>
+                        <p className="transaction-detail-text">{transactionObject.transactionMemberID}</p>
                         </div>
                     </div>
 
-                    <label>Amount
-                        <input type='number' name='transactionAmount' onChange={handleAmountChange}/>
-                    </label>
-
-                    <label for="frequency">Frequency
-                        <select name="frequency" onChange={handleFrequencyChange}>
-                            <option value="one-time">One-Time</option>
-                            <option value="daily">Daily</option>
-                            <option value="weekly">Weekly</option>
-                            <option value="bi-weekly">Bi-Weekly</option>
-                            <option value="bi-monthly">Bi-Monthly</option>
-                            <option value="monthly">Monthly</option>
-                            <option value="annually">Annually</option>
-                        </select>
-                    </label>
-
-                    <div id="transaction-form-buttons">
-                        <button id="submit-transaction-button" className="transaction-form-button" onClick={handleSubmit}>Submit</button>
+                    <div id="transactions-button-containter" className='row'>
+                        <button id="submit-transaction-button" className="transaction-form-button" onClick={handleSubmit}>Submit Transaction</button>
                     </div>
-                </form>
-                <p>{JSON.stringify(transactionObject)}</p>
+
+                </div>
             </div>
         )
     } else {
@@ -240,7 +301,7 @@ function TransactionView({API, transactionObject, setTransactionObject, members}
                 {/* <div className='component-title'>Transaction View</div> */}
 
                 <div id="transaction-show-container" className="col">
-                <div className='member-avatar'><p>{getMemberNameFromID(currentTransaction.transactionMemberID, true)}</p></div>
+                    <div className='member-avatar'><p>{getMemberNameFromID(currentTransaction.transactionMemberID, true)}</p></div>
                     <p id="transaction-member-text">{getMemberNameFromID(currentTransaction.transactionMemberID)}'s Transaction</p>
     
                     <div id="transaction-source-container" className="row">

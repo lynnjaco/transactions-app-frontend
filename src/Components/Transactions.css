@@ -4,7 +4,8 @@
 
     background: #ebdbcc;
     color: #dfaf82;
-    position: relative;
+    position: sticky;
+    top: 0;
 }
 
 #transaction-view {
@@ -66,7 +67,7 @@ thead{
     height: 40px;
     font-weight: 600;
     position: sticky;
-    top: 0;
+    top: 70px;
 }
 
 #header-row {

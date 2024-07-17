@@ -85,23 +85,49 @@
 }
 
 #transactions-button-containter {
-    width: 50%;
     justify-content: space-between;
-    margin-top: 30px;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .transaction-form-button {
-    width: 200px;
-    height: 30px;
+    width: 220px;
+    height: 40px;
+    margin: 10px;
     text-transform: uppercase;
-    border: none;
-    background: #65baa0;
-    color: white;
+    border: 1px solid #dfaf82;
+    font-weight: 600;
+    background: transparent;
+    color: #dfaf82;
+}
+.transaction-form-button:hover {
+    color: #65baa0;
+    border: 1px solid #65baa0;
+    cursor: pointer;
 }
 
-.transaction-form-button:hover {
-    background: #377d68;
-    cursor: pointer;
+#transaction-form-buttons{
+    margin-top: 20px;
+}
+.new-transaction-form-button{
+    width: 180px;
+    height: 40px;
+    margin: 15px;
+    text-transform: uppercase;
+    font-weight: 600;
+    border: 1px solid #ffffff;
+    background: transparent;
+    color: #ffffff;
+}
+.new-transaction-form-button:hover{
+    width: 180px;
+    height: 40px;
+    margin: 15px;
+    text-transform: uppercase;
+    font-weight: 600;
+    border: 1px solid #0d4434;
+    color: #0d4434;
 }
 
 /* Update Form */
@@ -113,4 +139,31 @@
 
 #transaction-form {
     color: white;
+    width: 80%;
+    align-items: start;
+    position: relative;
+    top: 90px;
+    left: 80px;
+
+    p {
+        margin-bottom: 25px;
+
+    }
+}
+
+.new-transaction-label {
+    margin: 10px 0px;
+
+}
+.form-choice {
+    position: absolute;
+    left: 160px;
+    width: 200px;
+    height: 20px;
+    border: none;
+}
+
+
+#select-category-container {
+    margin-top: 10px;
 }

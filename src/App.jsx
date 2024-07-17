@@ -85,6 +85,7 @@ function App() {
                 <Route path="/" element={ <Home/> } />
                 <Route path="/about" element= { <About/> } />
                 <Route path="/dashboard" element= { <Dashboard members={ members } setMembers={ setMembers } transactions={ transactions } convertCentsToDollars={ convertCentsToDollars } calculateMonthlyAmount={ calculateMonthlyAmount }/> } />
+                <Route path="/dashboard/:id" element= { <Dashboard members={ members } setMembers={ setMembers } transactions={ transactions } convertCentsToDollars={ convertCentsToDollars } calculateMonthlyAmount={ calculateMonthlyAmount }/> } />
                 <Route path="/transactions" element= { <TransactionView API={ API } transactionObject={ transactionObject } setTransactionObject={ setTransactionObject } members={ members }/> } />
                 <Route path="/transactions/:id" element= { <TransactionView API={ API } transactionObject={ transactionObject } setTransactionObject={ setTransactionObject } members={ members }/> }/>
             </Routes>
