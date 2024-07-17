@@ -1,67 +1,58 @@
 import './Budget.css'
 import BudgetSnippets from './BudgetSnippets'
 
-function Budget( {transactions, convertCentsToDollars}) {
+function Budget( {transactions, convertCentsToDollars, calculateMonthlyAmount}) {
 
     // income catgegory totals calculations
     function getWagesTotal(array){
         return array
-        .filter(obj => obj.category === "Wages")
-        .reduce((sum, obj) => {
-            if (obj.frequency === "bi-monthly") {
-                return sum + (obj.amountInCents * 2)
-            } else if ( obj.frequency === "bi-weekly" ) {
-                return sum + (obj.amountInCents * 2.14)
-            } else if ( obj.frequency === "weekly" ) {
-                return sum + (obj.amountInCents * 4.2)
-            } else {
-                return sum + obj.amountInCents
-            }
+        .filter(transactionObj => transactionObj.category === "Wages")
+        .reduce((sum, obj) => { return sum + calculateMonthlyAmount(obj.amountInCents, obj.frequency)
         }, 0);
     }
     function getInterestTotal(array){
-        return array.filter(obj => obj.category === "Interest").reduce((sum, obj) => sum + obj.amountInCents, 0);
+        return array.filter(obj => obj.category === "Interest").reduce((sum, obj) => sum + calculateMonthlyAmount(obj.amountInCents, obj.frequency), 0);
     }
     function getInvestmentTotal(array){
-        return array.filter(obj => obj.category === "Investment").reduce((sum, obj) => sum + obj.amountInCents, 0);
+        return array.filter(obj => obj.category === "Investment").reduce((sum, obj) => sum + calculateMonthlyAmount(obj.amountInCents, obj.frequency), 0);
     }
     function getGiftTotal(array){
-        return array.filter(obj => obj.category === "Gift").reduce((sum, obj) => sum + obj.amountInCents, 0);
+        return array.filter(obj => obj.category === "Gift").reduce((sum, obj) => sum + calculateMonthlyAmount(obj.amountInCents, obj.frequency), 0);
     }
     function getBankTransferTotal(array){
-        return array.filter(obj => obj.category === "Bank Transfer").reduce((sum, obj) => sum + obj.amountInCents, 0);
+        return array.filter(obj => obj.category === "Bank Transfer").reduce((sum, obj) => sum + calculateMonthlyAmount(obj.amountInCents, obj.frequency), 0);
     }
     function getBusinessTotal(array){
-        return array.filter(obj => obj.category === "Business").reduce((sum, obj) => sum + obj.amountInCents, 0);
+        return array.filter(obj => obj.category === "Business").reduce((sum, obj) => sum + calculateMonthlyAmount(obj.amountInCents, obj.frequency), 0);
     }
     function getOtherIncomeTotal(array){
-        return array.filter(obj => obj.category === "Other" && obj.transactionType === "Credit").reduce((sum, obj) => sum + obj.amountInCents, 0);
+        return array.filter(obj => obj.category === "Other" && obj.transactionType === "Credit").reduce((sum, obj) => sum + calculateMonthlyAmount(obj.amountInCents, obj.frequency), 0);
     }
 
     // expenses catgegory totals calculations
     function getHomeTotal(array){
-        return array.filter(obj => obj.category === "Home").reduce((sum, obj) => sum + obj.amountInCents, 0);
+        return array.filter(obj => obj.category === "Home").reduce((sum, obj) => sum + calculateMonthlyAmount(obj.amountInCents, obj.frequency), 0);
     }
     function getShoppingTotal(array){
-        return array.filter(obj => obj.category === "Shopping").reduce((sum, obj) => sum + obj.amountInCents, 0);
+        return array.filter(obj => obj.category === "Shopping").reduce((sum, obj) => sum + calculateMonthlyAmount(obj.amountInCents, obj.frequency), 0);
     }
     function getAutoTotal(array){
-        return array.filter(obj => obj.category === "Auto").reduce((sum, obj) => sum + obj.amountInCents, 0);
+        return array.filter(obj => obj.category === "Auto").reduce((sum, obj) => sum + calculateMonthlyAmount(obj.amountInCents, obj.frequency), 0);
     }
     function getEntertainmentTotal(array){
-        return array.filter(obj => obj.category === "Entertainment").reduce((sum, obj) => sum + obj.amountInCents, 0);
+        return array.filter(obj => obj.category === "Entertainment").reduce((sum, obj) => sum + calculateMonthlyAmount(obj.amountInCents, obj.frequency), 0);
     }
     function getTravelTotal(array){
-        return array.filter(obj => obj.category === "Travel").reduce((sum, obj) => sum + obj.amountInCents, 0);
+        return array.filter(obj => obj.category === "Travel").reduce((sum, obj) => sum + calculateMonthlyAmount(obj.amountInCents, obj.frequency), 0);
     }
     function getFoodTotal(array){
-        return array.filter(obj => obj.category === "Food").reduce((sum, obj) => sum + obj.amountInCents, 0);
+        return array.filter(obj => obj.category === "Food").reduce((sum, obj) => sum + calculateMonthlyAmount(obj.amountInCents, obj.frequency), 0);
     }
     function getHealthWellnessTotal(array){
-        return array.filter(obj => obj.category === "Health/Wellness").reduce((sum, obj) => sum + obj.amountInCents, 0);
+        return array.filter(obj => obj.category === "Health/Wellness").reduce((sum, obj) => sum + calculateMonthlyAmount(obj.amountInCents, obj.frequency), 0);
     }
     function getOtherExpenseTotal(array){
-        return array.filter(obj => obj.category === "Other" && obj.transactionType === "Debit").reduce((sum, obj) => sum + obj.amountInCents, 0);
+        return array.filter(obj => obj.category === "Other" && obj.transactionType === "Debit").reduce((sum, obj) => sum + calculateMonthlyAmount(obj.amountInCents, obj.frequency), 0);
     }
 
     return (
@@ -138,7 +129,7 @@ function Budget( {transactions, convertCentsToDollars}) {
                     </div>
                 </div>
             </div>
-            <BudgetSnippets transactions={ transactions } convertCentsToDollars={ convertCentsToDollars }/>
+            <BudgetSnippets transactions={ transactions } convertCentsToDollars={ convertCentsToDollars } calculateMonthlyAmount={ calculateMonthlyAmount }/>
         </>
     )  
 }

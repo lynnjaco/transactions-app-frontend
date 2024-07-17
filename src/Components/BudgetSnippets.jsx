@@ -1,6 +1,6 @@
 import './BudgetSnippets.css'
 
-function BudgetSnippets( {transactions, convertCentsToDollars}) {
+function BudgetSnippets( {transactions, convertCentsToDollars, calculateMonthlyAmount}) {
 
     function calculateIncomeTotal(array){
         return array.filter(obj => obj.transactionType === "Credit").reduce((sum, obj) => sum + obj.amountInCents, 0);
