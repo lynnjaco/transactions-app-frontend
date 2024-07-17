@@ -1,17 +1,4 @@
-#transaction-form {
-    background-color: white;
-    width: 600px;
-    height: 400px;
-    padding: 40px 30px;
-
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
 /* Show */
-
 #transaction-show-container {
     width: 50%;
     height: 100%;
@@ -115,4 +102,15 @@
 .transaction-form-button:hover {
     background: #377d68;
     cursor: pointer;
+}
+
+/* Update Form */
+#transaction-form-container {
+    position: relative; 
+    width: 50%;
+    height: 100%;
+}
+
+#transaction-form {
+    color: white;
 }
