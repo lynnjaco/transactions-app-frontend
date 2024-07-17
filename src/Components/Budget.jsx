@@ -55,6 +55,13 @@ function Budget( {transactions, convertCentsToDollars, calculateMonthlyAmount}) 
         return array.filter(obj => obj.category === "Other" && obj.transactionType === "Debit").reduce((sum, obj) => sum + calculateMonthlyAmount(obj.amountInCents, obj.frequency), 0);
     }
 
+    // Get totals for income and expenses
+    function calculateIncome(array){
+        return getWagesTotal(array) + getInterestTotal(array) + getInvestmentTotal(array) + getGiftTotal(array) + getBankTransferTotal(array) + getBusinessTotal(array) + getOtherIncomeTotal(array);
+    }
+    function calculateExpenses(array){
+        return  getHomeTotal(array) + getShoppingTotal(array) + getAutoTotal(array) + getEntertainmentTotal(array) + getTravelTotal(array) + getFoodTotal(array) + getHealthWellnessTotal(array) + getOtherExpenseTotal(array);
+    }
     return (
         <>
             <div id="budget-breakdown-container">
@@ -129,7 +136,7 @@ function Budget( {transactions, convertCentsToDollars, calculateMonthlyAmount}) 
                     </div>
                 </div>
             </div>
-            <BudgetSnippets transactions={ transactions } convertCentsToDollars={ convertCentsToDollars } calculateMonthlyAmount={ calculateMonthlyAmount }/>
+            <BudgetSnippets transactions={ transactions } convertCentsToDollars={ convertCentsToDollars } calculateIncome={ calculateIncome } calculateExpenses={ calculateExpenses }/>
         </>
     )  
 }

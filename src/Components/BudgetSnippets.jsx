@@ -1,16 +1,9 @@
 import './BudgetSnippets.css'
 
-function BudgetSnippets( {transactions, convertCentsToDollars, calculateMonthlyAmount}) {
-
-    function calculateIncomeTotal(array){
-        return array.filter(obj => obj.transactionType === "Credit").reduce((sum, obj) => sum + obj.amountInCents, 0);
-    }
-    function calculateExpensesTotal(array){
-        return array.filter(obj => obj.transactionType === "Debit").reduce((sum, obj) => sum + obj.amountInCents, 0);
-    }
+function BudgetSnippets( {transactions, convertCentsToDollars, calculateIncome, calculateExpenses}) {
 
     function calculateNetIncome(array){
-        let net = calculateIncomeTotal(array) - calculateExpensesTotal(array);
+        let net = calculateIncome(array) - calculateExpenses(array);
         return net < 0 ? `- ${convertCentsToDollars(Math.abs(net))}` : `${convertCentsToDollars(net)}`;
     }
 
@@ -20,7 +13,7 @@ function BudgetSnippets( {transactions, convertCentsToDollars, calculateMonthlyA
                 <img className='snippet-icon' src='/assets/incomeicon.svg' alt='Income Snippet Icon'/>
                 <div className='snippet-amount-container'>
                     <p className='snippet-title'>Monthly Income</p>
-                    <p className='snippet-amount'>+ { convertCentsToDollars(calculateIncomeTotal(transactions)) }</p>
+                    <p className='snippet-amount'>+ { convertCentsToDollars(calculateIncome(transactions)) }</p>
                 </div>
             </div>
             
@@ -28,7 +21,7 @@ function BudgetSnippets( {transactions, convertCentsToDollars, calculateMonthlyA
                 <img className='snippet-icon' src='/assets/expenseicon.svg' alt='Expenses Snippet Icon'/>
                 <div className='snippet-amount-container'>
                     <p className='snippet-title'>Monthly Expenses</p>
-                    <p className='snippet-amount'>- { convertCentsToDollars(calculateExpensesTotal(transactions)) }</p>
+                    <p className='snippet-amount'>- { convertCentsToDollars(calculateExpenses(transactions)) }</p>
                 </div>
             </div>
 
