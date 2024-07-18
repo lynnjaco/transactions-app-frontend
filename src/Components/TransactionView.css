@@ -91,7 +91,7 @@
     margin-right: auto;
 }
 
-.transaction-form-button {
+.transaction-view-button {
     width: 220px;
     height: 40px;
     margin: 10px;
@@ -101,7 +101,7 @@
     background: transparent;
     color: #dfaf82;
 }
-.transaction-form-button:hover {
+.transaction-view-button:hover {
     color: #65baa0;
     border: 1px solid #65baa0;
     cursor: pointer;
@@ -110,7 +110,7 @@
 #transaction-form-buttons{
     margin-top: 20px;
 }
-.new-transaction-form-button{
+.transaction-form-button{
     width: 180px;
     height: 40px;
     margin: 15px;
@@ -120,15 +120,16 @@
     background: transparent;
     color: #ffffff;
 }
-.new-transaction-form-button:hover{
-    width: 180px;
-    height: 40px;
-    margin: 15px;
-    text-transform: uppercase;
-    font-weight: 600;
+.transaction-form-button:hover{
     border: 1px solid #0d4434;
     color: #0d4434;
 }
+
+#update-transaction-button {
+    border: 1px solid white;
+    color: white;
+}
+
 
 /* Update Form */
 #transaction-form-container {
@@ -138,22 +139,37 @@
 }
 
 #transaction-form {
-    color: white;
+    color: rgb(171, 227, 208);
+    width: 80%;
+    align-items: start;
+    position: absolute;
+    top: 160px;
+    left: 80px;
+}
+
+.form-instructions {
+    position: absolute;
+    top: 80px;
+    left: 50%;
+    width: 100%;
+    transform: translate(-50%);
+    margin-bottom: 25px;
+    color: #ffffff;
+    text-align: center;
+    font-size: 14px;
+}
+
+#edit-transaction-form {
+    color: rgb(171, 227, 208);
     width: 80%;
     align-items: start;
     position: relative;
-    top: 90px;
-    left: 80px;
-
-    p {
-        margin-bottom: 25px;
-
-    }
+    top: 35px;
+    left: 65px;
 }
 
 .new-transaction-label {
-    margin: 10px 0px;
-
+    margin: 10px 0;
 }
 .form-choice {
     position: absolute;
@@ -161,8 +177,8 @@
     width: 200px;
     height: 20px;
     border: none;
+    background-color: #ebfdf7;
 }
-
 
 #select-category-container {
     margin-top: 10px;
